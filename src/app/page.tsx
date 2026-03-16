@@ -134,7 +134,7 @@ export default function ResourceLandingPage() {
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 px-6 text-center">
-        <p className="font-medium">© 2026 Oakscale. All rights reserved.</p>
+        <p className="font-medium">© 2026 Oakscale Brand Portfolio</p>
       </footer>
     </div>
   );
