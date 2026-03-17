@@ -8,7 +8,7 @@ export default function ResourceLandingPage() {
       name: "Sea Love",
       slug: "sea-love",
       tagline: "Celebrate Love, Designed By You",
-      description: "A unique, experiential retail franchise offering custom candle pouring and boutique shopping. ",
+      description: "A unique, experiential retail franchise offering custom candle pouring and boutique shopping.",
       color: "bg-[#8A8377]", 
       textColor: "text-[#8A8377]"
     },
@@ -134,8 +134,8 @@ export default function ResourceLandingPage() {
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 px-6 text-center">
-        <p className="font-medium">© 2026 Oakscale Brand Portfolio</p>
+        <p className="font-medium">© 2026 Oakscale. All rights reserved.</p>
       </footer>
     </div>
   );
-} 
+}

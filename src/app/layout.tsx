@@ -10,7 +10,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Oakscale FP | Brand Portfolio",
+  title: "Oakscale | Brand Portfolio",
   description: "Discover premium franchise opportunities.",
 };
 
