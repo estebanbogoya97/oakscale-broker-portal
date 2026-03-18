@@ -134,7 +134,45 @@ export default function ResourceLandingPage() {
 
       {/* Footer */}
       <footer className="bg-slate-900 text-slate-400 py-12 px-6 text-center">
-        <p className="font-medium">© 2026 Oakscale Brand Portfolio</p>
+        <p className="font-medium">© 2026 Oakscale, LLC. All rights reserved.</p>
+        <p className="font-medium">447 Broadway, 2nd Floor, #541, New York, New York 10013</p>
+        <p>
+          <a
+            href="https://www.oakscale.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            www.oakscale.com
+          </a>
+        </p>
+
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <a
+            href="https://www.linkedin.com/company/oakscale/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Oakscale on LinkedIn"
+            className="h-12 w-12 rounded-full bg-slate-700/60 hover:bg-slate-600 text-slate-200 hover:text-white flex items-center justify-center transition-colors"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C21.1 8.65 22 10.7 22 13.8V21h-4v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.6-2.38 3.27V21h-4V9Z" />
+            </svg>
+          </a>
+
+          <a
+            href="https://www.instagram.com/oakscale"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Oakscale on Instagram"
+            className="h-12 w-12 rounded-full bg-slate-700/60 hover:bg-slate-600 text-slate-200 hover:text-white flex items-center justify-center transition-colors"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.9" aria-hidden="true">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        </div>
       </footer>
     </div>
   );
