@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Cargamos la fuente elegante y moderna con sus diferentes grosores
@@ -24,6 +25,7 @@ export default function RootLayout({
       {/* antialiased hace que la letra se vea mucho más suave y fina en pantallas modernas */}
       <body className={`${plusJakarta.className} antialiased`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
