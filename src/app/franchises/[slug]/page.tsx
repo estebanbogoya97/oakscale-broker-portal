@@ -60,6 +60,7 @@ export default function FranchisePage() {
   
   const twoMinuteDrill = data.two_minute_drill;
   const faqs = data.faqs || [];
+  const cardHoverClass = "transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg";
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-24">
@@ -117,7 +118,7 @@ export default function FranchisePage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-4 text-sm font-bold uppercase tracking-widest transition-colors whitespace-nowrap border-b-2 ${
+              className={`px-6 py-4 text-sm font-bold uppercase tracking-widest whitespace-nowrap border-b-2 transition-all duration-300 hover:-translate-y-0.5 ${
                 activeTab === tab 
                   ? "border-current text-slate-900" 
                   : "border-transparent text-slate-400 hover:text-slate-600"
@@ -139,7 +140,7 @@ export default function FranchisePage() {
         {activeTab === "about" && (
           <div className="animate-in fade-in duration-500">
             <h2 className="text-3xl font-bold mb-6" style={{ color: colors.primary }}>About the Opportunity</h2>
-            <p className="text-xl text-slate-700 leading-relaxed mb-8 font-medium bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">{data.about}</p>
+            <p className={`text-xl text-slate-700 leading-relaxed mb-8 font-medium bg-white p-8 rounded-3xl border border-slate-200 shadow-sm ${cardHoverClass}`}>{data.about}</p>
           </div>
         )}
 
@@ -167,7 +168,7 @@ export default function FranchisePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               {/* 1. Ideal Candidate Profile (SIEMPRE ARRIBA Y OCUPA 2 COLUMNAS) */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm md:col-span-2">
+              <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm md:col-span-2 ${cardHoverClass}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>👤</div>
                   <h3 className="text-xl font-bold text-slate-900">Ideal Candidate Profile</h3>
@@ -176,7 +177,7 @@ export default function FranchisePage() {
               </div>
 
               {/* 2. Financials & Fees */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+              <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full ${cardHoverClass}`}>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>💰</div>
                   <h3 className="text-xl font-bold text-slate-900">Financials & Fees</h3>
@@ -208,7 +209,7 @@ export default function FranchisePage() {
               </div>
 
               {/* 3. Fast Facts */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+              <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full ${cardHoverClass}`}>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>⚡</div>
                   <h3 className="text-xl font-bold text-slate-900">Fast Facts</h3>
@@ -225,7 +226,7 @@ export default function FranchisePage() {
 
               {/* 4. Talking Points (2 COLUMNAS) */}
               {twoMinuteDrill.talkingPoints && (
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm md:col-span-2">
+                <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm md:col-span-2 ${cardHoverClass}`}>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>🗣️</div>
                     <h3 className="text-xl font-bold text-slate-900">Key Talking Points</h3>
@@ -243,7 +244,7 @@ export default function FranchisePage() {
 
               {/* 5. Handling Objections (2 COLUMNAS) */}
               {twoMinuteDrill.objections && (
-                <div className="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-md md:col-span-2">
+                <div className="bg-slate-900 p-8 rounded-3xl border border-slate-800 shadow-md md:col-span-2 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-2xl">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 rounded-xl bg-white/10 text-xl">🛡️</div>
                     <h3 className="text-xl font-bold text-white">Handling Common Objections</h3>
@@ -260,7 +261,7 @@ export default function FranchisePage() {
               )}
 
               {/* 6. Revenue Streams */}
-              <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+              <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full ${cardHoverClass}`}>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>📈</div>
                   <h3 className="text-xl font-bold text-slate-900">Revenue Streams</h3>
@@ -276,7 +277,7 @@ export default function FranchisePage() {
 
               {/* 7. Digital Footprint (ESTA ES LA ÚNICA CAJA DE LINKS, EN LA ESQUINA) */}
               {twoMinuteDrill.socialMedia && twoMinuteDrill.socialMedia.length > 0 && (
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full">
+                <div className={`bg-white p-8 rounded-3xl border border-slate-200 shadow-sm h-full ${cardHoverClass}`}>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="p-3 rounded-xl bg-slate-50 text-xl" style={{ color: colors.primary }}>🌐</div>
                     <h3 className="text-xl font-bold text-slate-900">Digital Footprint</h3>
@@ -305,7 +306,7 @@ export default function FranchisePage() {
             <h2 className="text-3xl font-bold mb-6" style={{ color: colors.primary }}>Useful Resources</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {data.resources?.map((res: any, i: number) => (
-                <a key={i} href={res.url} target="_blank" rel="noopener noreferrer" className="p-6 bg-white border border-slate-200 rounded-3xl hover:shadow-lg transition-all flex items-center justify-between group cursor-pointer">
+                <a key={i} href={res.url} target="_blank" rel="noopener noreferrer" className={`p-6 bg-white border border-slate-200 rounded-3xl transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg flex items-center justify-between group cursor-pointer`}>
                   <div className="flex items-center gap-4">
                     <span className="text-3xl">{res.type === 'video' ? '▶️' : '📄'}</span>
                     <span className="font-bold text-slate-700 group-hover:text-slate-900">{res.title}</span>
@@ -323,7 +324,7 @@ export default function FranchisePage() {
             <h2 className="text-3xl font-bold mb-6" style={{ color: colors.primary }}>Key Contacts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {data.contacts?.map((contact: any, i: number) => (
-                <div key={i} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm">
+                <div key={i} className={`p-6 bg-white border border-slate-200 rounded-3xl shadow-sm ${cardHoverClass}`}>
                   <h3 className="text-xl font-bold text-slate-900">{contact.name}</h3>
                   <p className="text-xs font-bold uppercase tracking-widest mt-1 mb-4" style={{ color: colors.secondary }}>{contact.title}</p>
                   <a href={`mailto:${contact.email}`} className="block text-sm font-medium text-slate-600 hover:text-slate-900">✉️ {contact.email}</a>
@@ -340,7 +341,7 @@ export default function FranchisePage() {
             <h2 className="text-3xl font-bold mb-6" style={{ color: colors.primary }}>Frequently Asked Questions</h2>
             <div className="space-y-4">
               {faqs.map((faq: any, i: number) => (
-                <div key={i} className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm">
+                <div key={i} className={`p-6 bg-white border border-slate-200 rounded-3xl shadow-sm ${cardHoverClass}`}>
                   <h3 className="text-lg font-bold text-slate-900 mb-2">{faq.q}</h3>
                   <p className="text-slate-600">
                     {faq.a} 
