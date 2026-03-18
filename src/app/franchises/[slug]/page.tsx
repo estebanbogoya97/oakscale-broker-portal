@@ -5,6 +5,80 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
+type InvestmentRow = {
+  item: string;
+  low: string;
+  high: string;
+};
+
+const investmentBreakdowns: Record<string, InvestmentRow[]> = {
+  "payroll-vault": [
+    { item: "Initial Franchise Fees (1)", low: "$68,500", high: "$88,500" },
+    { item: "Rent (2)", low: "$0", high: "$800" },
+    { item: "Rental Improvements (2)", low: "$0", high: "$400" },
+    { item: "Deposits (2)", low: "$0", high: "$1,000" },
+    { item: "American Payroll Association Training Fee (3)", low: "$0", high: "$1,810" },
+    { item: "Training Expenses (3)", low: "$0", high: "$0" },
+    { item: "Computer System (4)", low: "$225", high: "$1,225" },
+    { item: "Furniture, Fixtures", low: "$150", high: "$650" },
+    { item: "Equipment, and Phone Lines (4)", low: "$0", high: "$0" },
+    { item: "Technology Startup Fee (5)", low: "$1,500", high: "$1,500" },
+    { item: "Insurance and Professional Services (6)", low: "$4,000", high: "$6,000" },
+    { item: "Additional Funds - 3 months (7)", low: "$3,000", high: "$10,000" },
+    { item: "TOTALS", low: "$77,375", high: "$111,885" },
+  ],
+  "greenlight-mobility": [
+    { item: "Initial Franchise Fee", low: "$59,500", high: "$59,500" },
+    { item: "Training Fee", low: "$4,500", high: "$4,500" },
+    { item: "Training Expenses", low: "$4,500", high: "$9,810" },
+    { item: "Marketing Materials and Supplies and Initial Marketing", low: "$7,500", high: "$15,000" },
+    { item: "Office Equipment, Furniture, Supplies, Office Computer and Tablet", low: "$500", high: "$4,000" },
+    { item: "Software and Technology", low: "$800", high: "$1,750" },
+    { item: "Vehicles Down Payment", low: "$6,600", high: "$9,500" },
+    { item: "Licenses and Permits", low: "$500", high: "$4,000" },
+    { item: "Office/Warehouse Rent, Lease, Security and Utility Deposits", low: "$5,000", high: "$20,000" },
+    { item: "Leasehold Improvement Office or Warehouse", low: "$0", high: "$5,000" },
+    { item: "Signage", low: "$0", high: "$1,500" },
+    { item: "Tools, Equipment, Racking", low: "$5,000", high: "$9,500" },
+    { item: "Initial Inventory", low: "$40,000", high: "$60,000" },
+    { item: "Insurance Costs", low: "$5,000", high: "$10,000" },
+    { item: "Legal Services", low: "$1,500", high: "$5,000" },
+    { item: "Additional Funds - 3 months", low: "$20,000", high: "$68,000" },
+    { item: "Total Estimate", low: "$160,900", high: "$287,060" },
+  ],
+  "sea-love": [
+    { item: "Initial Franchise Fee", low: "$49,500", high: "$49,500" },
+    { item: "Construction and Leasehold Improvements", low: "$10,000", high: "$80,000" },
+    { item: "Lease Deposits - Three Months", low: "$2,500", high: "$15,000" },
+    { item: "Furniture, Fixtures, Equipment, and Office Expenses", low: "$10,000", high: "$65,000" },
+    { item: "Signage", low: "$1,000", high: "$10,250" },
+    { item: "Computer, Software, and Point of Sale System", low: "$2,500", high: "$2,500" },
+    { item: "Grand Opening Marketing/Market Introduction Program", low: "$5,000", high: "$6,000" },
+    { item: "Initial Inventory", low: "$15,000", high: "$35,000" },
+    { item: "Utility Deposits", low: "$500", high: "$1,000" },
+    { item: "Insurance Deposits - Three Months", low: "$500", high: "$1,000" },
+    { item: "Travel for Initial Training", low: "$1,000", high: "$2,000" },
+    { item: "Professional Fees", low: "$1,000", high: "$5,000" },
+    { item: "Licenses and Permits", low: "$500", high: "$5,000" },
+    { item: "Additional Funds - Three Months", low: "$10,000", high: "$15,000" },
+    { item: "Total Estimate", low: "$109,000", high: "$292,250" },
+  ],
+  "break-coffee": [
+    { item: "Initial Franchise Fee", low: "$59,500", high: "$59,500" },
+    { item: "Break Coffee Beverage Machines", low: "$25,000", high: "$30,000" },
+    { item: "Initial Training Expenses", low: "$1,000", high: "$3,000" },
+    { item: "Professional Fees", low: "$1,000", high: "$3,000" },
+    { item: "Business Licenses and Permits", low: "$25", high: "$500" },
+    { item: "Computer Systems", low: "$0", high: "$1,000" },
+    { item: "Vehicle", low: "$0", high: "$1,500" },
+    { item: "Initial Inventory to Begin Operating", low: "$500", high: "$1,000" },
+    { item: "Grand Opening Advertising", low: "$5,000", high: "$5,000" },
+    { item: "Insurance", low: "$500", high: "$1,500" },
+    { item: "Additional Funds - 3 months", low: "$10,000", high: "$40,000" },
+    { item: "TOTALS", low: "$102,525", high: "$146,000" },
+  ],
+};
+
 export default function FranchisePage() {
   const params = useParams();
   const slug = params.slug as string;
@@ -12,6 +86,7 @@ export default function FranchisePage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("about");
+  const [isInvestmentOpen, setIsInvestmentOpen] = useState(false);
 
   useEffect(() => {
     async function fetchFranchise() {
@@ -60,6 +135,8 @@ export default function FranchisePage() {
   
   const twoMinuteDrill = data.two_minute_drill;
   const faqs = data.faqs || [];
+  const investmentRows = investmentBreakdowns[slug] || [];
+  const hasInvestmentBreakdown = investmentRows.length > 0;
   const cardHoverClass = "transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg";
 
   return (
@@ -105,11 +182,84 @@ export default function FranchisePage() {
             {data.tagline}
           </p>
           
-          <div className="inline-block px-6 py-3 rounded-full font-bold text-sm shadow-xl" style={{ backgroundColor: colors.secondary, color: '#fff' }}>
-            Estimated Investment: {data.investment}
+          <div className="relative inline-flex flex-col items-center">
+            <button
+              type="button"
+              onClick={() => hasInvestmentBreakdown && setIsInvestmentOpen(true)}
+              aria-expanded={hasInvestmentBreakdown ? isInvestmentOpen : undefined}
+              className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm shadow-xl transition-all duration-200 ${hasInvestmentBreakdown ? "cursor-pointer hover:-translate-y-0.5 hover:brightness-110 hover:shadow-2xl hover:ring-2 hover:ring-white/20 active:translate-y-0" : "cursor-default"}`}
+              style={{ backgroundColor: colors.secondary, color: "#fff" }}
+            >
+              <span>Estimated Investment: {data.investment}</span>
+              {hasInvestmentBreakdown && (
+                <span className="inline-flex items-center opacity-90">
+                  <svg
+                    viewBox="0 0 20 20"
+                    className="h-3.5 w-3.5"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.12l3.71-3.89a.75.75 0 1 1 1.08 1.04l-4.25 4.46a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06Z" />
+                  </svg>
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </header>
+
+      {hasInvestmentBreakdown && isInvestmentOpen && (
+        <div
+          className="fixed inset-0 z-[80] bg-slate-950/50 backdrop-blur-[2px] p-4 md:p-8"
+          onClick={() => setIsInvestmentOpen(false)}
+        >
+          <div
+            className="mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4 border-b border-slate-200 px-5 py-4 text-left md:px-6">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Estimated Investment Breakdown</p>
+                <p className="mt-1 text-sm font-semibold text-slate-700">Detailed low and high estimate for {data.name}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsInvestmentOpen(false)}
+                className="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 hover:bg-slate-50 hover:text-slate-700"
+              >
+                Close
+              </button>
+            </div>
+
+            <div className="max-h-[70vh] overflow-auto">
+              <table className="w-full text-left text-sm text-slate-700">
+                <thead className="sticky top-0 bg-slate-900 text-white">
+                  <tr>
+                    <th className="px-4 py-3 font-bold">Type of Expenditure</th>
+                    <th className="px-4 py-3 text-right font-bold">Low Estimate</th>
+                    <th className="px-4 py-3 text-right font-bold">High Estimate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {investmentRows.map((row, index) => {
+                    const isTotal = index === investmentRows.length - 1;
+                    return (
+                      <tr
+                        key={row.item}
+                        className={`${isTotal ? "bg-slate-100" : "odd:bg-white even:bg-slate-50/70"} border-b border-slate-200`}
+                      >
+                        <td className={`px-4 py-3 ${isTotal ? "font-extrabold text-slate-900" : "font-medium"}`}>{row.item}</td>
+                        <td className={`px-4 py-3 text-right ${isTotal ? "font-extrabold text-slate-900" : "font-semibold"}`}>{row.low}</td>
+                        <td className={`px-4 py-3 text-right ${isTotal ? "font-extrabold text-slate-900" : "font-semibold"}`}>{row.high}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Tabs Menu */}
       <div className="max-w-4xl mx-auto mt-8 px-6">
