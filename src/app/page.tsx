@@ -8,7 +8,7 @@ export default function ResourceLandingPage() {
       name: "Sea Love",
       slug: "sea-love",
       tagline: "Celebrate Love, Designed By You",
-      description: "A unique, experiential retail franchise offering custom candle pouring and boutique shopping. ",
+      description: "A unique, experiential retail franchise offering custom scent blending and boutique shopping.",
       color: "bg-[#8A8377]", 
       textColor: "text-[#8A8377]"
     },

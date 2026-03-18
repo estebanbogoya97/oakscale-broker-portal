@@ -18,6 +18,10 @@
     "http",
     "net"
   ],
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "problems.exclude": {
+    "**/node_modules/**": true
+  },
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   }
